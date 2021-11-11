@@ -1,9 +1,54 @@
+import { useEffect, useState } from "react";
+
 function App() {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    setOpen(true);
+  }, []);
+
+  const submitForm = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div className="App">
       <main className="App-header">
-        <div>
-          <h1>Hi</h1>
+        <div
+          className="main-container"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            minHeight: "100vh",
+            backgroundColor: "#fafafa",
+            color: "#333333",
+            textAlign: "center",
+          }}
+        >
+          <div>
+            <h1
+              className="transition"
+              style={{
+                opacity: open ? 1 : 0,
+              }}
+            >
+              Analyzer
+            </h1>
+            <form
+              className="main-container__form"
+              onSubmit={(e) => submitForm(e)}
+            >
+              <div>
+                <input type="file" style={{ textAlign: "center" }} />
+              </div>
+              <textarea rows={4} placeholder="Description here" />
+              <br />
+              <button type="submit" title="Submit">
+                Submit
+              </button>
+            </form>
+          </div>
         </div>
       </main>
     </div>
