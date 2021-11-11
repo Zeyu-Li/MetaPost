@@ -19,16 +19,24 @@ function App() {
             minHeight: "100vh",
             backgroundColor: "#fafafa",
             color: "#333333",
+            textAlign: "center",
           }}
         >
-          <h1
-            className="transition"
-            style={{
-              opacity: open ? 1 : 0,
-            }}
-          >
-            Analyzer
-          </h1>
+          <div>
+            <h1
+              className="transition"
+              style={{
+                opacity: open ? 1 : 0,
+              }}
+            >
+              Analyzer
+            </h1>
+            <form className="main-container__form">
+              <div>
+                <input type="file" style={{ textAlign: "center" }} />
+              </div>
+            </form>
+          </div>
         </div>
       </main>
     </div>
