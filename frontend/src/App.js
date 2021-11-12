@@ -9,6 +9,7 @@ function App() {
 
   const submitForm = (e) => {
     e.preventDefault();
+    // TODO: submit data then await
   };
 
   return (
@@ -29,12 +30,17 @@ function App() {
               onSubmit={(e) => submitForm(e)}
             >
               <div>
+                {/* TODO: https://medium.com/@650egor/simple-drag-and-drop-file-upload-in-react-2cb409d88929 */}
                 <input type="file" title="Select image or video" />
               </div>
-              <textarea rows={4} placeholder="Description here" />
+              <textarea
+                rows={5}
+                placeholder="Description here"
+                className="transition"
+              />
               <br />
-              <button type="submit" title="Submit">
-                Submit
+              <button type="submit" title="Submit" className="transition">
+                <b>Submit</b>
               </button>
             </form>
             <div style={{ height: 150 }}></div>
