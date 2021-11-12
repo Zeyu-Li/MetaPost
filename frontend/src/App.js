@@ -29,7 +29,7 @@ function App() {
               onSubmit={(e) => submitForm(e)}
             >
               <div>
-                <input type="file" />
+                <input type="file" title="Select image or video" />
               </div>
               <textarea rows={4} placeholder="Description here" />
               <br />
@@ -37,6 +37,7 @@ function App() {
                 Submit
               </button>
             </form>
+            <div style={{ height: 150 }}></div>
           </div>
         </div>
       </main>
