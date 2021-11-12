@@ -14,18 +14,7 @@ function App() {
   return (
     <div className="App">
       <main className="App-header">
-        <div
-          className="main-container"
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            minHeight: "100vh",
-            backgroundColor: "#fafafa",
-            color: "#333333",
-            textAlign: "center",
-          }}
-        >
+        <div className="main-container">
           <div>
             <h1
               className="transition"
@@ -40,7 +29,7 @@ function App() {
               onSubmit={(e) => submitForm(e)}
             >
               <div>
-                <input type="file" style={{ textAlign: "center" }} />
+                <input type="file" />
               </div>
               <textarea rows={4} placeholder="Description here" />
               <br />

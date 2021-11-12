@@ -19,13 +19,24 @@ code {
   -o-transition: 0.5s;
 }
 
-.main-container__form input {
-  outline: 2px dashed #92b0b3;
-  outline-offset: -10px;
-  padding: 100px;
-}
-
-.main-container__form input::before {
-  content: "Hi";
-  display: block;
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #fafafa;
+  color: #333333;
+  text-align: center;
+  &__form {
+    input {
+      outline: 2px dashed #92b0b3;
+      outline-offset: -10px;
+      padding: 100px;
+      text-align: center;
+    }
+    input::before {
+      content: "Hi";
+      display: block;
+    }
+  }
 }
