@@ -1,11 +1,26 @@
-import { useEffect, useState } from "react";
+import { createRef, useEffect, useState } from "react";
 
 function App() {
   const [open, setOpen] = useState(false);
+  const [onHover, setOnHover] = useState(false);
+
+  // https://medium.com/@650egor/simple-drag-and-drop-file-upload-in-react-2cb409d88929
+  const dropRef = createRef(null);
+
+  const dragIn = () => {
+    setOnHover(true);
+  };
+
+  const dragOut = () => {
+    setOnHover(false);
+  };
 
   useEffect(() => {
     setOpen(true);
-  }, []);
+    dropRef.current.addEventListener("dragenter", dragIn);
+    dropRef.current.addEventListener("dragleave", dragOut);
+    dropRef.current.addEventListener("drop", dragOut);
+  }, [dropRef]);
 
   const submitForm = (e) => {
     e.preventDefault();
@@ -31,7 +46,14 @@ function App() {
             >
               <div>
                 {/* TODO: https://medium.com/@650egor/simple-drag-and-drop-file-upload-in-react-2cb409d88929 */}
-                <input type="file" title="Select image or video" />
+                <label>
+                  <input
+                    type="file"
+                    title="Select image or video"
+                    ref={dropRef}
+                    className={`transition ${onHover ? "inputbox--hover" : ""}`}
+                  />
+                </label>
               </div>
               <textarea
                 rows={5}
@@ -43,7 +65,7 @@ function App() {
                 <b>Submit</b>
               </button>
             </form>
-            <div style={{ height: 150 }}></div>
+            <div style={{ height: 200 }}></div>
           </div>
         </div>
       </main>

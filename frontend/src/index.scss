@@ -1,3 +1,6 @@
+$base-color: #92b0b3;
+$solid-color: #333333;
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -28,6 +31,8 @@ button {
   border-radius: 10px;
   cursor: pointer;
   border: none;
+
+  color: $solid-color;
   // box-shadow: 5px 5px 3px;
   &:hover {
     background-color: #92b0b388;
@@ -41,13 +46,17 @@ textarea {
   font-size: 1rem;
 }
 
+.inputbox--hover {
+  background-color: rgba(146, 176, 179, 0.541) !important;
+}
+
 .main-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   background-color: #fafafa;
-  color: #333333;
+  color: $solid-color;
   text-align: center;
   textarea {
     width: 80%;
@@ -66,10 +75,21 @@ textarea {
     }
   }
   &__form {
+    input::before {
+      content: "";
+      display: block;
+      background-image: url("./img/bringIn.svg");
+      text-align: center;
+      margin: 0 auto;
+      width: 60px;
+      height: 60px;
+      padding-bottom: 10px;
+      background-repeat: no-repeat;
+    }
     input {
       cursor: pointer;
       background-color: #92b0b323;
-      outline: 2px dashed #92b0b3;
+      outline: 2px dashed $base-color;
       outline-offset: -10px;
       border-radius: 20px;
       padding: 100px;
