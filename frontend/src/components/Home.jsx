@@ -41,7 +41,8 @@ const Home = () => {
     }
 
     let data = new FormData();
-    data.append("file", e.target.file_input.value[0]);
+    console.log(e.target.file_input, e.target.file_input.files[0]);
+    data.append("file", e.target.file_input.files[0]);
     data.append("description", description);
     post({
       data,
