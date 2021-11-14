@@ -1,6 +1,7 @@
 const express = require("express");
 const fileUpload = require("express-fileupload");
 const cors = require("cors");
+const fs = require('fs')
 require('dotenv').config();
 
 const app = express();
@@ -14,13 +15,22 @@ app.use(cors());
 
 app.get("/api", function (req, res) {
 
-  res.send("Hello World! " + `${process.env.AZURE_API_KEY}`);
+  res.send("Hello World!");
 
 });
 
+app.get("/api/get_image/:id", (req, res) => {
+  const id = req.params.id;
+  const imagePath = `./uploads/${id}.jpg`
+  fs.readFile(imagePath, (err, data) => {
+    if (err) console.log(err);
+    res.end(data); // Send the file data to the browser.
+  })
+})
+
 // controller
-app.listen(3005, () => {
-  // console.log("Started Server")
+app.listen(port=3005, () => {
+  console.log("Started Server on " + port)
 });
 
 module.exports = app;
