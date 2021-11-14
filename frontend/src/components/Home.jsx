@@ -1,7 +1,9 @@
 import { createRef, useEffect, useState } from "react";
+import { post } from "../util/fetch";
 
 const Home = () => {
   const [open, setOpen] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [onHover, setOnHover] = useState(false);
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -27,14 +29,31 @@ const Home = () => {
   const submitForm = (e) => {
     e.preventDefault();
     setError(false);
+    setSubmitting(true);
     // TODO: submit data then await
     const description = e.target.description.value;
     if (!description) {
       // show error
       setErrorMsg("Description is empty");
       setError(true);
+      setSubmitting(false);
       return;
     }
+
+    let data = new FormData();
+    data.append("file", e.target.file_input.value[0]);
+    data.append("description", description);
+    post({
+      data,
+    })
+      .then(() => {
+        // goto next page
+      })
+      .catch((err) => {
+        setErrorMsg("Could not connect to server");
+        setError(true);
+        setSubmitting(false);
+      });
   };
 
   return (
@@ -60,6 +79,7 @@ const Home = () => {
                   <input
                     type="file"
                     title="Select image or video"
+                    name="file_input"
                     ref={dropRef}
                     className={`transition ${onHover ? "inputbox--hover" : ""}`}
                   />
@@ -74,7 +94,12 @@ const Home = () => {
                 {error ? errorMsg : null}
               </p>
               <br />
-              <button type="submit" title="Submit" className="transition">
+              <button
+                type="submit"
+                title="Submit"
+                className="transition"
+                disabled={submitting}
+              >
                 <b>Submit</b>
               </button>
             </form>
