@@ -16,7 +16,7 @@ app.get("/api", function (req, res) {
 });
 
 // controller
-app.listen(3000, () => {
+app.listen(3005, () => {
   // console.log("Started Server")
 });
 
