@@ -1,5 +1,3 @@
-import { createRef, useEffect, useState } from "react";
-import Home from "./components/Home";
 import Main from "./pages/Main";
 
 function App() {
