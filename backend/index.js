@@ -1,6 +1,7 @@
 const express = require("express");
 const fileUpload = require("express-fileupload");
 const cors = require("cors");
+require('dotenv').config();
 
 const app = express();
 
@@ -12,7 +13,9 @@ app.use(fileUpload());
 app.use(cors());
 
 app.get("/api", function (req, res) {
-  res.send("Hello World!");
+
+  res.send("Hello World! " + `${process.env.AZURE_API_KEY}`);
+
 });
 
 // controller
