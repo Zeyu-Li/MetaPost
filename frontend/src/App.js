@@ -1,5 +1,3 @@
-import { createRef, useEffect, useState } from "react";
-import Home from "./components/Home";
 import Main from "./pages/Main";
 
 function App() {
@@ -7,7 +5,7 @@ function App() {
     <div className="App">
       <main className="App-header">
         <div className="main-container">
-            <Main />
+          <Main />
         </div>
       </main>
     </div>
