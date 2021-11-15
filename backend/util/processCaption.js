@@ -1,3 +1,8 @@
+/**
+ * CREDITS: Special thanks to Techno-cratz for providing the code required for preprocessing the content
+ * of the post to make it more accessibility friendly. (Github: @Bhavnoor-Kaur, @raquibk)
+ */
+
 'use strict';
 
 // NOTE: Don't remove the unused modules
@@ -31,10 +36,6 @@ const genCaptionImage = async (AZURE_API_KEY, imagePath) => {
     // return Promise.resolve(captionLocal.text);
     return captionLocal.text;
 }
-
-
-
-
 
 module.exports =  {
     genCaptionImage
