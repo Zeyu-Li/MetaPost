@@ -9,6 +9,16 @@ const Main = () => {
         console.log(res)
         setLoggedIn(true)
     }
+
+    const processPost = (desc="Demo Desc") => {
+        const option = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+            body: JSON.stringify(reqObject),
+        };
+    }
     return (
       <>
           {loggedIn &&

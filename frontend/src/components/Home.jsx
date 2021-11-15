@@ -59,6 +59,7 @@ const Home = () => {
                 <label>
                   <input
                     type="file"
+                    name="uploaded_file"
                     title="Select image or video"
                     ref={dropRef}
                     className={`transition ${onHover ? "inputbox--hover" : ""}`}
