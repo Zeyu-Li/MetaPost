@@ -3,7 +3,8 @@ const fileUpload = require("express-fileupload");
 const cors = require("cors");
 const fs = require('fs')
 const multer = require('multer');
-const processCaption = require('./util/processCaption');
+const processCaption = require('./util/processImageCaption');
+const {processPostCaption} = require("./util/processPostedCaption");
 
 require('dotenv').config();
 
@@ -27,13 +28,11 @@ const upload = multer({ storage: storage })
 // not sure if we need cors but we'll keep it for now
 app.use(cors());
 
-app.post("/api", async function (req, res) {
-  // res.send("Hello World!");
-  const obj = {
-    filename: "imgTest",
-    description: "Des from hello changed"
-  };
-  res.json(obj);
+app.get("/api", async function (req, res) {
+  res.send("Hello World!");
+  // const testCaption = "hi THERE HEllo HAVING 😀😃😄😁 #havingfun #livelyhuman";
+  // const finPostCaption = await processPostCaption(testCaption, process.env.RAPID_API_KEY);
+  // res.send(finPostCaption);
 });
 
 
@@ -46,10 +45,19 @@ app.post("/api/process_post", upload.single('uploaded_file'), async function (re
     return res.send(error)
   }
   const imageDes = await processCaption.genCaptionImage(process.env.AZURE_API_KEY, file.path);
+  let finPostCaption = caption;
+  // try {
+  //   finPostCaption = await processPostCaption(caption, process.env.RAPID_API_KEY);
+  // }
+  // catch (error) {
+  //   console.log(error)
+  //   finPostCaption = ""
+  // }
+
   const obj = {
     filename: file.filename,
     fileDescription: imageDes,
-    caption: caption
+    caption: finPostCaption
   };
   res.json(obj);
 });
