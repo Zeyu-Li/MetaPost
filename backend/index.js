@@ -39,20 +39,18 @@ app.post("/api", async function (req, res) {
 
 app.post("/api/process_post", upload.single('uploaded_file'), async function (req, res) {
   const file = req.file;
-  // console.log(file)
-  // console.log(req.body.description);
+  const caption = req.body.caption;
   if (!file) {
     const error = new Error('Please upload a file')
     error.httpStatusCode = 400
     return res.send(error)
   }
   const imageDes = await processCaption.genCaptionImage(process.env.AZURE_API_KEY, file.path);
-  console.log(imageDes);
   const obj = {
     filename: file.filename,
-    description: imageDes
+    fileDescription: imageDes,
+    caption: caption
   };
-  console.log(obj);
   res.json(obj);
 });
 

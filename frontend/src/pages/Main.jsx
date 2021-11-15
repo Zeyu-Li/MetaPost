@@ -18,29 +18,20 @@ const Main = () => {
         setLoggedIn(true)
     }
 
-    const preprocessPost = async (file, desc) => {
+    const preprocessPost = async (file, caption) => {
         const data = new FormData();
         data.append("uploaded_file", file);
-        data.append("description", desc)
+        data.append("caption", caption)
         const resp = await fetch("http://localhost:3005/api/process_post", {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
             body: data, // body data type must match "Content-Type" header
         })
             .then(response => response.json())
-        //     .then(data => {
-        //         setDataPreProcessFilename(data.filename);
-        //         setDataPreProcessDescription(data.description);
-        //         return data;
-        //     });
-        // // setDataPreProcessFilename(resp.filename);
-        //
-        // console.log("resp");
         console.log(resp);
         console.log("button pressed");
         setDataPreviewPost({filename: resp.filename,
-            description: resp.description})
+            fileDescription: resp.fileDescription, caption: resp.caption})
         setPostPreprocess(true)
-
     }
 
     return (
