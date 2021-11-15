@@ -27,11 +27,15 @@ const upload = multer({ storage: storage })
 // not sure if we need cors but we'll keep it for now
 app.use(cors());
 
-app.get("/api", async function (req, res) {
-  // console.log(imageDes);
+app.post("/api", async function (req, res) {
   // res.send("Hello World!");
-  res.send(imageDes);
+  const obj = {
+    filename: "imgTest",
+    description: "Des from hello changed"
+  };
+  res.json(obj);
 });
+
 
 app.post("/api/process_post", upload.single('uploaded_file'), async function (req, res) {
   const file = req.file;
