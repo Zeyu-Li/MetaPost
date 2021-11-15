@@ -15,6 +15,12 @@ app.get("/api", function (req, res) {
   res.send("Hello World!");
 });
 
+app.post("/api", function (req, res) {
+  console.log(req.body, 1);
+
+  res.send("Hello World!");
+});
+
 // controller
 app.listen(3005, () => {
   // console.log("Started Server")

@@ -40,15 +40,26 @@ const Home = () => {
       return;
     }
 
+    if (
+      !["image/jpeg", "image/gif", "image/png", "image/svg+xml"].includes(
+        e.target.file_input.files[0].type
+      )
+    ) {
+      setErrorMsg("Wrong file type");
+      setError(true);
+      setSubmitting(false);
+      return;
+    }
+
     let data = new FormData();
-    console.log(e.target.file_input, e.target.file_input.files[0]);
+    // console.log(e.target.file_input, e.target.file_input.files[0]);
     data.append("file", e.target.file_input.files[0]);
     data.append("description", description);
-    post({
-      data,
-    })
+    // post(data)
+    post({ description, file: e.target.file_input.files[0] })
       .then(() => {
         // goto next page
+        setSubmitting(false);
       })
       .catch((err) => {
         setErrorMsg("Could not connect to server");

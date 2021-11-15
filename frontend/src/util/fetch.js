@@ -1,4 +1,4 @@
-const url = "http://localhost:3005/";
+const url = "http://localhost:3005/api";
 
 export const post = (data) => {
   return fetch(url, {
