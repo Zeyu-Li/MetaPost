@@ -5,7 +5,7 @@ const cors = require("cors");
 const app = express();
 
 // takes in json
-app.use(express.json({ limit: "1mb" }));
+// app.use(express.json({ limit: "1mb" }));
 app.use(fileUpload());
 
 // not sure if we need cors but we'll keep it for now
@@ -16,7 +16,8 @@ app.get("/api", function (req, res) {
 });
 
 app.post("/api", function (req, res) {
-  console.log(req.body, 1);
+  console.log(req.body);
+  console.log(req.files);
 
   res.send("Hello World!");
 });
