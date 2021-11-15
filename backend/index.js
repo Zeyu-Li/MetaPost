@@ -46,12 +46,13 @@ app.post("/api/process_post", upload.single('uploaded_file'), async function (re
     error.httpStatusCode = 400
     return res.send(error)
   }
-  const imageDes = await processCaption.genCaptionImage(process.env.AZURE_API_KEY, "uploads/imgTest.jpg");
+  const imageDes = await processCaption.genCaptionImage(process.env.AZURE_API_KEY, file.path);
   console.log(imageDes);
   const obj = {
     filename: file.filename,
     description: imageDes
   };
+  console.log(obj);
   res.json(obj);
 });
 

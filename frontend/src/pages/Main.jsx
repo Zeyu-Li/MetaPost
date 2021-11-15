@@ -22,7 +22,7 @@ const Main = () => {
         const data = new FormData();
         data.append("uploaded_file", file);
         data.append("description", desc)
-        const resp = await fetch("http://localhost:3005/api", {
+        const resp = await fetch("http://localhost:3005/api/process_post", {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
             body: data, // body data type must match "Content-Type" header
         })
