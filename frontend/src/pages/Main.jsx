@@ -6,8 +6,10 @@ import PreviewPost from "../components/PreviewPost";
 const Main = () => {
     const [loggedIn, setLoggedIn] = useState(false);
     const [postPreprocess, setPostPreprocess] = useState(false);
-    const [dataPreProcess, setDataPreProcess] = useState(
-        {imgName: "http://localhost:3005/api/get_image/imgTest", desc: "Desc"})
+    // const [dataPreProcess, setDataPreProcess] = useState(
+    //     {filename: "imgTest", description: "Desc"})
+    const [dataPreProcessFilename, setDataPreProcessFilename] = useState('imgTest');
+    const [dataPreProcessDescription, setDataPreProcessDescription] = useState('Desc');
 
     const fbResponse = (res) => {
         // res get the data returned from facebook login including the access token etc
@@ -22,7 +24,15 @@ const Main = () => {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
             body: data, // body data type must match "Content-Type" header
         })
-            .then(response => response.json());
+            .then(response => response.json())
+            .then(data => {
+                setDataPreProcessFilename(data.filename);
+                setDataPreProcessDescription(data.description);
+                return data;
+            });
+        // setDataPreProcessFilename(resp.filename);
+
+        console.log("resp");
         console.log(resp);
         setPostPreprocess(true)
     }
@@ -37,7 +47,7 @@ const Main = () => {
           }
           {loggedIn &&
             postPreprocess &&
-              <PreviewPost dataPreProcess={dataPreProcess} />
+              <PreviewPost dataPreProcess={{filename: "imgTest", description: "Desc"}} />
           }
           {!loggedIn &&
                 <FbLogin

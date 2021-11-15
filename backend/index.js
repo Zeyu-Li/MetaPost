@@ -3,6 +3,8 @@ const fileUpload = require("express-fileupload");
 const cors = require("cors");
 const fs = require('fs')
 const multer = require('multer');
+const processCaption = require('./util/processCaption');
+
 require('dotenv').config();
 
 const app = express();
@@ -25,11 +27,13 @@ const upload = multer({ storage: storage })
 // not sure if we need cors but we'll keep it for now
 app.use(cors());
 
-app.get("/api", function (req, res) {
-  res.send("Hello World!");
+app.get("/api", async function (req, res) {
+  // console.log(imageDes);
+  // res.send("Hello World!");
+  res.send(imageDes);
 });
 
-app.post("/api/process_post", upload.single('uploaded_file'), function (req, res) {
+app.post("/api/process_post", upload.single('uploaded_file'), async function (req, res) {
   const file = req.file;
   // console.log(file)
   // console.log(req.body.description);
@@ -38,16 +42,18 @@ app.post("/api/process_post", upload.single('uploaded_file'), function (req, res
     error.httpStatusCode = 400
     return res.send(error)
   }
+  const imageDes = await processCaption.genCaptionImage(process.env.AZURE_API_KEY, "uploads/imgTest.jpg");
+  console.log(imageDes);
   const obj = {
     filename: file.filename,
-    description: "Modified"
+    description: imageDes
   };
   res.json(obj);
 });
 
 app.get("/api/get_image/:id", (req, res) => {
   const id = req.params.id;
-  const imagePath = `./uploads/${id}.jpg`
+  const imagePath = `./uploads/${id}`
   fs.readFile(imagePath, (err, data) => {
     if (err) console.log(err);
     res.end(data); // Send the file data to the browser.
