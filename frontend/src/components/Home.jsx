@@ -35,7 +35,7 @@ const Home = (props) => {
       setError(true);
       return;
     }
-    props.preprocessPost(e.target.uploaded_file.files[0])
+    props.preprocessPost(e.target.uploaded_file.files[0], description)
   };
 
   return (

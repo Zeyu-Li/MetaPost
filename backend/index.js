@@ -32,14 +32,15 @@ app.get("/api", function (req, res) {
 app.post("/api/process_post", upload.single('uploaded_file'), function (req, res) {
   const file = req.file;
   // console.log(file)
-  console.log(req.body.text);
+  // console.log(req.body.description);
   if (!file) {
     const error = new Error('Please upload a file')
     error.httpStatusCode = 400
     return res.send(error)
   }
   const obj = {
-    filename: file.filename
+    filename: file.filename,
+    description: "Modified"
   };
   res.json(obj);
 });
