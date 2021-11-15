@@ -1,9 +1,7 @@
 import { createRef, useEffect, useState } from "react";
-import { post } from "../util/fetch";
 
-const Home = () => {
+const Home = (props) => {
   const [open, setOpen] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
   const [onHover, setOnHover] = useState(false);
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -29,51 +27,15 @@ const Home = () => {
   const submitForm = (e) => {
     e.preventDefault();
     setError(false);
-    setSubmitting(true);
     // TODO: submit data then await
     const description = e.target.description.value;
     if (!description) {
       // show error
       setErrorMsg("Description is empty");
       setError(true);
-      setSubmitting(false);
       return;
     }
-
-    // check file type
-    try {
-      if (
-        !["image/jpeg", "image/gif", "image/png", "image/svg+xml"].includes(
-          e.target.file_input.files[0].type
-        )
-      ) {
-        setErrorMsg("Wrong file type");
-        setError(true);
-        setSubmitting(false);
-        return;
-      }
-    } catch (err) {
-      setErrorMsg("Not image or video linked");
-      setError(true);
-      setSubmitting(false);
-      return;
-    }
-
-    const data = new FormData();
-    // console.log(e.target.file_input, e.target.file_input.files[0]);
-    data.append("file", e.target.file_input.files[0]);
-    data.append("description", description);
-    // post(data)
-    post(data)
-      .then(() => {
-        // goto next page
-        setSubmitting(false);
-      })
-      .catch((err) => {
-        setErrorMsg("Could not connect to server");
-        setError(true);
-        setSubmitting(false);
-      });
+    props.preprocessPost(e.target.uploaded_file.files[0], description)
   };
 
   return (
@@ -98,8 +60,8 @@ const Home = () => {
                 <label>
                   <input
                     type="file"
+                    name="uploaded_file"
                     title="Select image or video"
-                    name="file_input"
                     ref={dropRef}
                     className={`transition ${onHover ? "inputbox--hover" : ""}`}
                   />
@@ -114,12 +76,7 @@ const Home = () => {
                 {error ? errorMsg : null}
               </p>
               <br />
-              <button
-                type="submit"
-                title="Submit"
-                className="transition"
-                disabled={submitting}
-              >
+              <button type="submit" title="Submit" className="transition">
                 <b>Submit</b>
               </button>
             </form>
