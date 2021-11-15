@@ -1,6 +1,6 @@
 import { createRef, useEffect, useState } from "react";
 
-const Home = () => {
+const Home = (props) => {
   const [open, setOpen] = useState(false);
   const [onHover, setOnHover] = useState(false);
   const [error, setError] = useState(false);
@@ -35,6 +35,7 @@ const Home = () => {
       setError(true);
       return;
     }
+    props.preprocessPost(e.target.uploaded_file.files[0])
   };
 
   return (

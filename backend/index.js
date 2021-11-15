@@ -30,13 +30,18 @@ app.get("/api", function (req, res) {
 });
 
 app.post("/api/process_post", upload.single('uploaded_file'), function (req, res) {
-  const file = req.file
+  const file = req.file;
+  // console.log(file)
+  console.log(req.body.text);
   if (!file) {
     const error = new Error('Please upload a file')
     error.httpStatusCode = 400
     return res.send(error)
   }
-  res.send(file)
+  const obj = {
+    filename: file.filename
+  };
+  res.json(obj);
 });
 
 app.get("/api/get_image/:id", (req, res) => {
