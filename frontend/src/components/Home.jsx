@@ -40,23 +40,31 @@ const Home = () => {
       return;
     }
 
-    if (
-      !["image/jpeg", "image/gif", "image/png", "image/svg+xml"].includes(
-        e.target.file_input.files[0].type
-      )
-    ) {
-      setErrorMsg("Wrong file type");
+    // check file type
+    try {
+      if (
+        !["image/jpeg", "image/gif", "image/png", "image/svg+xml"].includes(
+          e.target.file_input.files[0].type
+        )
+      ) {
+        setErrorMsg("Wrong file type");
+        setError(true);
+        setSubmitting(false);
+        return;
+      }
+    } catch (err) {
+      setErrorMsg("Not image or video linked");
       setError(true);
       setSubmitting(false);
       return;
     }
 
-    let data = new FormData();
+    const data = new FormData();
     // console.log(e.target.file_input, e.target.file_input.files[0]);
     data.append("file", e.target.file_input.files[0]);
     data.append("description", description);
     // post(data)
-    post({ description, file: e.target.file_input.files[0] })
+    post(data)
       .then(() => {
         // goto next page
         setSubmitting(false);
