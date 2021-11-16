@@ -25,7 +25,9 @@ const Main = () => {
     const resp = await fetch("http://localhost:3005/api/process_post", {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       body: data, // body data type must match "Content-Type" header
-    }).then((response) => response.json());
+    })
+      .then((response) => response.json())
+      .catch((err) => console.log(err));
     console.log(resp);
     console.log("button pressed");
     setDataPreviewPost({

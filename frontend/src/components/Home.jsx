@@ -1,6 +1,6 @@
 import { createRef, useEffect, useState } from "react";
 
-const Home = (props) => {
+const Home = ({ preprocessPost }) => {
   const [open, setOpen] = useState(false);
   const [onHover, setOnHover] = useState(false);
   const [error, setError] = useState(false);
@@ -35,7 +35,25 @@ const Home = (props) => {
       setError(true);
       return;
     }
-    props.preprocessPost(e.target.uploaded_file.files[0], description)
+
+    // check file type
+    try {
+      if (
+        !["image/jpeg", "image/gif", "image/png", "image/svg+xml"].includes(
+          e.target.uploaded_file.files[0].type
+        )
+      ) {
+        setErrorMsg("Wrong file type");
+        setError(true);
+        return;
+      }
+    } catch (err) {
+      setErrorMsg("Not image or video linked");
+      setError(true);
+      return;
+    }
+
+    preprocessPost(e.target.uploaded_file.files[0], description);
   };
 
   return (
@@ -71,6 +89,7 @@ const Home = (props) => {
                 rows={5}
                 placeholder="Description here"
                 name="description"
+                title="description area"
               />
               <p className="main-container__form__error">
                 {error ? errorMsg : null}
