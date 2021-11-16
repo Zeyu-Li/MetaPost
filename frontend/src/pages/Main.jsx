@@ -18,7 +18,7 @@ const Main = () => {
     setLoggedIn(true);
   };
 
-  const preprocessPost = async (file, caption) => {
+  const preprocessPost = async (file, caption, finishedCallback) => {
     const data = new FormData();
     data.append("uploaded_file", file);
     data.append("caption", caption);
@@ -27,15 +27,18 @@ const Main = () => {
       body: data, // body data type must match "Content-Type" header
     })
       .then((response) => response.json())
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        finishedCallback();
+      });
     console.log(resp);
-    console.log("button pressed");
     setDataPreviewPost({
       filename: resp.filename,
       fileDescription: resp.fileDescription,
       caption: resp.caption,
     });
     setPostPreprocess(true);
+    finishedCallback();
   };
 
   return (

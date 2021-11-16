@@ -4,6 +4,7 @@ const Home = ({ preprocessPost }) => {
   const [open, setOpen] = useState(false);
   const [onHover, setOnHover] = useState(false);
   const [error, setError] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
   // https://medium.com/@650egor/simple-drag-and-drop-file-upload-in-react-2cb409d88929
@@ -17,6 +18,10 @@ const Home = ({ preprocessPost }) => {
     setOnHover(false);
   };
 
+  const finishedCallback = () => {
+    setSubmitting(false);
+  };
+
   useEffect(() => {
     setOpen(true);
     dropRef.current.addEventListener("dragenter", dragIn);
@@ -27,12 +32,14 @@ const Home = ({ preprocessPost }) => {
   const submitForm = (e) => {
     e.preventDefault();
     setError(false);
+    setSubmitting(true);
     // TODO: submit data then await
     const description = e.target.description.value;
     if (!description) {
       // show error
       setErrorMsg("Description is empty");
       setError(true);
+      setSubmitting(false);
       return;
     }
 
@@ -45,15 +52,21 @@ const Home = ({ preprocessPost }) => {
       ) {
         setErrorMsg("Wrong file type");
         setError(true);
+        setSubmitting(false);
         return;
       }
     } catch (err) {
       setErrorMsg("Not image or video linked");
       setError(true);
+      setSubmitting(false);
       return;
     }
 
-    preprocessPost(e.target.uploaded_file.files[0], description);
+    preprocessPost(
+      e.target.uploaded_file.files[0],
+      description,
+      finishedCallback
+    );
   };
 
   return (
@@ -95,7 +108,12 @@ const Home = ({ preprocessPost }) => {
                 {error ? errorMsg : null}
               </p>
               <br />
-              <button type="submit" title="Submit" className="transition">
+              <button
+                type="submit"
+                title="Submit"
+                className="transition main-container__form__button"
+                disabled={submitting}
+              >
                 <b>Submit</b>
               </button>
             </form>
