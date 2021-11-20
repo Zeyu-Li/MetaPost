@@ -114,10 +114,13 @@ const Home = ({ preprocessPost }) => {
                 className="transition main-container__form__button"
                 disabled={submitting}
               >
-                <b>Submit</b>
+                <b>{submitting ? "Submitting" : "Submit"}</b>
               </button>
             </form>
-            <div style={{ height: 200 }}></div>
+            <div style={{ height: 80 }}></div>
+            <div>
+              <small>Drag in or click on the green box to select the image file to be posted<br/>Then write a description for the post</small>
+            </div>
           </div>
         </div>
       </main>

@@ -15,7 +15,6 @@ const logoStyle = {
 const FbLogin = (props) => {
     return (
       <>
-      
       <div style={divStyle}>
         <div style={logoStyle}>
           <h1 style={{fontSize:120}} > 
@@ -23,11 +22,12 @@ const FbLogin = (props) => {
         </h1>
       <img
           src={"/logo.png"}
+          alt={"MetaPost logo"}
           alt={"logo"}
           style={{ height: 250, width: 250}}
         />
         </div>
-        <p style={{fontSize:20}}>An app made to make social media a more warm and accessible place for everyone.</p>
+        <p style={{fontSize:32, maxWidth: 800, margin: 0}}>An app made to make social media a more warm and accessible place for everyone.</p>
         <h1
           style={{ fontSize: 100,
             opacity: 1,
@@ -39,13 +39,9 @@ const FbLogin = (props) => {
               fields="name,email,picture"
               // onClick={componentClicked}
               callback={props.fbResponse} />
-        <h1
-          
-          style={{ fontSize: 200,
-            opacity: 1,
-          }}
-        ></h1>
-        <p style={{fontSize:20}}>An app made to make social media a more warm and accessible place for everyone.</p>
+        <div
+          style={{ height: 100 }}
+        ></div>
       </div>
           
 
