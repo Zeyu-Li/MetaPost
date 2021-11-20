@@ -6,19 +6,33 @@ const divStyle = {
   flexDirection: 'column'
 };
 
+const logoStyle = {
+  display: 'flex',
+  alignItems: 'center',
+  flexDirection: 'row'
+};
+
 const FbLogin = (props) => {
     return (
       <>
       
       <div style={divStyle}>
-      <h1 style={{fontsize:30}} > 
+        <div style={logoStyle}>
+          <h1 style={{fontSize:120}} > 
           MetaPost  
         </h1>
       <img
           src={"/logo.png"}
           alt={"logo"}
-          style={{ height: 500, width: 500}}
+          style={{ height: 250, width: 250}}
         />
+        </div>
+        <p style={{fontSize:20}}>An app made to make social media a more warm and accessible place for everyone.</p>
+        <h1
+          style={{ fontSize: 100,
+            opacity: 1,
+          }}></h1>
+    
           <FacebookLogin
               appId="432233278303617"
               autoLoad={true}
@@ -27,10 +41,11 @@ const FbLogin = (props) => {
               callback={props.fbResponse} />
         <h1
           
-          style={{
+          style={{ fontSize: 200,
             opacity: 1,
           }}
         ></h1>
+        <p style={{fontSize:20}}>An app made to make social media a more warm and accessible place for everyone.</p>
       </div>
           
 
