@@ -114,7 +114,7 @@ const Home = ({ preprocessPost }) => {
                 className="transition main-container__form__button"
                 disabled={submitting}
               >
-                <b>Submit</b>
+                <b>{submitting ? "Submitting" : "Submit"}</b>
               </button>
             </form>
             <div style={{ height: 200 }}></div>

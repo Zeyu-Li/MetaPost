@@ -9,14 +9,13 @@ const divStyle = {
 const FbLogin = (props) => {
     return (
       <>
-      
       <div style={divStyle}>
-      <h1 style={{fontsize:30, margin: 0}} > 
-          MetaPost  
-        </h1>
+      <h1 style={{fontSize: 36, margin: 0}} > 
+        MetaPost  
+      </h1>
       <img
           src={"/logo.png"}
-          alt={"logo"}
+          alt={"MetaPost logo"}
           style={{ height: 500, width: 500}}
         />
           <FacebookLogin
