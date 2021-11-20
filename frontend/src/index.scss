@@ -57,6 +57,19 @@ textarea {
   background-color: rgba(146, 176, 179, 0.541) !important;
 }
 
+.div-style {
+  display: flex;
+  align-items: center;
+}
+
+.flex-column {
+  flex-direction: column
+}
+
+.flex-row {
+  flex-direction: row
+}
+
 .main-container {
   display: flex;
   justify-content: center;
