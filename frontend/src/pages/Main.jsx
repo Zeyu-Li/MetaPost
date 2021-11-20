@@ -28,7 +28,8 @@ const Main = () => {
     })
       .then((response) => response.json())
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
+        alert("Server is not online")
         finishedCallback();
       });
     console.log(resp);
