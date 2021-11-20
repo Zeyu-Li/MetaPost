@@ -14,7 +14,7 @@ const FbLogin = (props) => {
           style={{ height: 250, width: 250}}
         />
         </div>
-        <p style={{fontSize:32, maxWidth: 800, margin: 0}}>An app made to make social media a more warm and accessible place for everyone.</p>
+        <p style={{fontSize:32, maxWidth: 800, margin: 0}}>An app made to make social media a more warm and accessible place for everyone</p>
         <div style={{ height: 100 }} ></div>
     
           <FacebookLogin
