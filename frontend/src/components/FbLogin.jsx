@@ -11,7 +11,7 @@ const FbLogin = (props) => {
       <>
       
       <div style={divStyle}>
-      <h1 style={{fontsize:30}} > 
+      <h1 style={{fontsize:30, margin: 0}} > 
           MetaPost  
         </h1>
       <img
@@ -25,12 +25,11 @@ const FbLogin = (props) => {
               fields="name,email,picture"
               // onClick={componentClicked}
               callback={props.fbResponse} />
-        <h1
-          
+        <div
           style={{
-            opacity: 1,
+            height: 80,
           }}
-        ></h1>
+        ></div>
       </div>
           
 
