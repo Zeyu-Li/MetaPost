@@ -46,7 +46,7 @@ const Home = ({ preprocessPost }) => {
     // check file type
     try {
       if (
-        !["image/jpeg", "image/gif", "image/png", "image/svg+xml"].includes(
+        !["image/jpeg", "image/gif", "image/png"].includes(
           e.target.uploaded_file.files[0].type
         )
       ) {
